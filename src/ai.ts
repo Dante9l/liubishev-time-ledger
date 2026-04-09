@@ -1,6 +1,7 @@
 import { requestUrl } from "obsidian";
 import { parseCategorySuggestionResponse } from "./ai-category.js";
 import { createTranslator, Locale } from "./i18n.js";
+import { extractModelIds, normalizeChatEndpoint, normalizeModelsEndpoint } from "./ai-utils.js";
 import { AISettings, CategorySuggestion } from "./types.js";
 
 export interface AIReviewContext {
@@ -57,11 +58,6 @@ export async function suggestCategoryWithAI(
   }
 
   return parseCategorySuggestionResponse(text, context.categories.map((item) => item.id), locale);
-}
-
-function normalizeEndpoint(baseUrl: string): string {
-  const trimmed = baseUrl.trim().replace(/\/+$/, "");
-  return trimmed.endsWith("/chat/completions") ? trimmed : `${trimmed}/chat/completions`;
 }
 
 function buildReviewPrompt(context: AIReviewContext, locale: Locale): string {
@@ -126,7 +122,7 @@ async function requestAIText(
   }
 
   const response = await requestUrl({
-    url: normalizeEndpoint(settings.baseUrl),
+    url: normalizeChatEndpoint(settings.baseUrl),
     method: "POST",
     throw: false,
     headers: {
@@ -148,6 +144,25 @@ async function requestAIText(
   }
 
   return extractContent(response.json)?.trim() ?? "";
+}
+
+export async function listAIModels(
+  settings: Pick<AISettings, "baseUrl" | "apiKey">,
+): Promise<string[]> {
+  const response = await requestUrl({
+    url: normalizeModelsEndpoint(settings.baseUrl),
+    method: "GET",
+    throw: false,
+    headers: {
+      Authorization: `Bearer ${settings.apiKey}`,
+    },
+  });
+
+  if (response.status < 200 || response.status >= 300) {
+    throw new Error(`HTTP ${response.status}`);
+  }
+
+  return extractModelIds(response.json);
 }
 
 function extractContent(payload: unknown): string | null {

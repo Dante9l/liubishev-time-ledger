@@ -2,6 +2,7 @@ import { ItemView, Menu, Notice, WorkspaceLeaf } from "obsidian";
 import type LiubishevTimeLedgerPlugin from "../main.js";
 import { formatDuration, minutesFromTimeKey } from "../time.js";
 import { Category, GapSegment, TimeEntry } from "../types.js";
+import { openConfirmModal } from "./confirm-modal.js";
 import { TODAY_VIEW_TYPE } from "../view-types.js";
 
 const HOUR_ROW_HEIGHT = 56;
@@ -45,11 +46,12 @@ export class TodayView extends ItemView {
     return "clock";
   }
 
-  async onOpen(): Promise<void> {
-    await this.refresh();
+  onOpen(): Promise<void> {
+    this.refresh();
+    return Promise.resolve();
   }
 
-  async refresh(): Promise<void> {
+  refresh(): void {
     const dateKey = this.plugin.getTodayDateKey();
     const summary = this.plugin.getPeriodSummary("day", dateKey);
     const categories = this.plugin.getSettings().categories;
@@ -76,7 +78,13 @@ export class TodayView extends ItemView {
   }
 
   private async confirmDeleteEntry(entryId: string): Promise<void> {
-    if (!window.confirm(this.plugin.t("common.confirmDeleteEntry"))) {
+    const confirmed = await openConfirmModal(this.app, {
+      title: this.plugin.t("dialog.deleteEntry.title"),
+      description: this.plugin.t("common.confirmDeleteEntry"),
+      confirmText: this.plugin.t("common.delete"),
+      cancelText: this.plugin.t("common.cancel"),
+    });
+    if (!confirmed) {
       return;
     }
 
@@ -93,8 +101,8 @@ export class TodayView extends ItemView {
     block.setAttr("title", tooltip);
 
     block.addEventListener("click", (event) => {
-      const target = event.target as HTMLElement | null;
-      if (target?.closest("button")) {
+      const target = event.target;
+      if (target instanceof HTMLElement && target.closest("button")) {
         return;
       }
 

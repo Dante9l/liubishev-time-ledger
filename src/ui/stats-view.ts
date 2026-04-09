@@ -23,11 +23,12 @@ export class StatsView extends ItemView {
     return "bar-chart-3";
   }
 
-  async onOpen(): Promise<void> {
-    await this.refresh();
+  onOpen(): Promise<void> {
+    this.refresh();
+    return Promise.resolve();
   }
 
-  async refresh(): Promise<void> {
+  refresh(): void {
     const t = this.plugin.t.bind(this.plugin);
     const summary = this.plugin.getPeriodSummary(this.period, this.plugin.getTodayDateKey());
     const categories = this.plugin.getSettings().categories;

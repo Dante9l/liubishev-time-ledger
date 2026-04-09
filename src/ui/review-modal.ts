@@ -23,13 +23,20 @@ export class ReviewResultModal extends Modal {
     const footer = contentEl.createDiv({ cls: "time-ledger-modal-footer" });
     new ButtonComponent(footer)
       .setButtonText(t("reviewModal.copy"))
-      .onClick(async () => {
-        await navigator.clipboard.writeText(this.content);
-        new Notice(t("notice.reviewCopied"));
-      });
+      .onClick(() => this.copyToClipboard());
     new ButtonComponent(footer)
       .setButtonText(t("reviewModal.insertCurrentNote"))
       .setCta()
       .onClick(() => void this.plugin.insertOrExportMarkdown(this.title, this.content));
+  }
+
+  private copyToClipboard(): void {
+    void navigator.clipboard.writeText(this.content)
+      .then(() => {
+        new Notice(this.plugin.t("notice.reviewCopied"));
+      })
+      .catch(() => {
+        new Notice(this.plugin.t("error.operationFailed"));
+      });
   }
 }

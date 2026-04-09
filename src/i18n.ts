@@ -150,6 +150,8 @@ const translations: Record<Locale, TranslationMap> = {
     "reviewModal.copy": "复制",
     "reviewModal.insertCurrentNote": "插入当前笔记",
 
+    "dialog.deleteEntry.title": "删除记录",
+
     "settings.title": "柳比歇夫时间账本设置",
     "settings.section.general": "常规",
     "settings.section.category": "分类",
@@ -190,6 +192,13 @@ const translations: Record<Locale, TranslationMap> = {
     "settings.smart.autoApplyTagsDescription": "AI 复核成功后，将建议标签自动写入表单",
     "settings.ai.enable": "启用 AI",
     "settings.ai.baseUrlDescription": "支持 OpenAI 兼容接口；可填写 /v1 或 /chat/completions",
+    "settings.ai.availableModels": "可用模型",
+    "settings.ai.availableModelsIdle": "填入 Base URL 和 API Key 后自动拉取模型列表。",
+    "settings.ai.availableModelsLoading": "正在拉取模型列表...",
+    "settings.ai.availableModelsReady": "已发现 {{count}} 个模型，可直接选择或继续手动填写。",
+    "settings.ai.availableModelsEmpty": "接口未返回模型列表，仍可手动填写模型名。",
+    "settings.ai.availableModelsError": "拉取模型列表失败：{{message}}",
+    "settings.ai.availableModelsPlaceholder": "选择已发现的模型",
     "settings.ai.includeNotes": "发送备注内容",
     "settings.ai.includeNotesDescription": "关闭后只发送统计与标签，不发送 note 字段",
 
@@ -332,9 +341,9 @@ const translations: Record<Locale, TranslationMap> = {
     "stats.highlight.entries": "{{count}} entries",
     "stats.highlight.gaps": "{{count}} gaps found",
 
-    "today.displayText": "Today's Time Ledger",
+    "today.displayText": "Today's time ledger",
     "today.kicker": "Today",
-    "today.title": "Today's Time Ledger",
+    "today.title": "Today's time ledger",
     "today.subtitle": "{{dateLabel}} · Focus on start + end times to see the day's spread",
     "today.summary.total": "Total time",
     "today.summary.totalMeta.empty": "No entries yet today",
@@ -357,9 +366,9 @@ const translations: Record<Locale, TranslationMap> = {
     "today.empty.description": "Add one entry with a start and end time to make the timeline appear.",
     "today.mini.tooltipHint": "Click to edit, right-click for more actions",
 
-    "stats.displayText": "Time Stats",
+    "stats.displayText": "Time stats",
     "stats.kicker": "Stats",
-    "stats.title": "Time Stats",
+    "stats.title": "Time stats",
     "stats.subtitle": "{{label}} · Inspect allocation, tag hotspots, and recent entries",
     "stats.action.exportReport": "Export summary",
     "stats.action.exportRaw": "Export raw log",
@@ -411,7 +420,9 @@ const translations: Record<Locale, TranslationMap> = {
     "reviewModal.copy": "Copy",
     "reviewModal.insertCurrentNote": "Insert into current note",
 
-    "settings.title": "Liubishev Time Ledger Settings",
+    "dialog.deleteEntry.title": "Delete entry",
+
+    "settings.title": "Liubishev Time Ledger settings",
     "settings.section.general": "General",
     "settings.section.category": "Categories",
     "settings.section.dailyNote": "Daily Note sync",
@@ -451,6 +462,13 @@ const translations: Record<Locale, TranslationMap> = {
     "settings.smart.autoApplyTagsDescription": "When AI review succeeds, automatically write suggested tags into the form",
     "settings.ai.enable": "Enable AI",
     "settings.ai.baseUrlDescription": "Supports OpenAI-compatible endpoints; /v1 and /chat/completions both work",
+    "settings.ai.availableModels": "Available models",
+    "settings.ai.availableModelsIdle": "Fill in Base URL and API Key to load models automatically.",
+    "settings.ai.availableModelsLoading": "Loading model list...",
+    "settings.ai.availableModelsReady": "{{count}} models found. You can pick one or keep typing manually.",
+    "settings.ai.availableModelsEmpty": "The endpoint returned no models. You can still type a model manually.",
+    "settings.ai.availableModelsError": "Failed to load model list: {{message}}",
+    "settings.ai.availableModelsPlaceholder": "Choose a detected model",
     "settings.ai.includeNotes": "Send note content",
     "settings.ai.includeNotesDescription": "When off, only stats and tags are sent, not the note field",
 

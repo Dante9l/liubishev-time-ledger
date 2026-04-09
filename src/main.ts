@@ -17,7 +17,6 @@ import { TimeLedgerStore } from "./store.js";
 import {
   buildSuggestedTimeInput,
   computeElapsedMinutes,
-  formatDuration,
   formatTimeInputForEntry,
   inferTimeInputStyle,
   minutesFromTimeKey,
@@ -43,11 +42,6 @@ export default class LiubishevTimeLedgerPlugin extends Plugin {
     this.addRibbonIcon("clock", this.t("command.openQuickEntry"), () => this.openQuickEntryModal());
     this.addSettingTab(new TimeLedgerSettingTab(this.app, this));
     this.registerCommands();
-  }
-
-  onunload(): void {
-    this.app.workspace.detachLeavesOfType(TODAY_VIEW_TYPE);
-    this.app.workspace.detachLeavesOfType(STATS_VIEW_TYPE);
   }
 
   getSettings(): PluginSettings {
@@ -490,8 +484,10 @@ export default class LiubishevTimeLedgerPlugin extends Plugin {
 
   private async refreshView(viewType: string): Promise<void> {
     for (const leaf of this.app.workspace.getLeavesOfType(viewType)) {
-      const view = leaf.view as { refresh?: () => Promise<void> | void };
-      await view.refresh?.();
+      const refresh = Reflect.get(leaf.view, "refresh");
+      if (typeof refresh === "function") {
+        await refresh.call(leaf.view);
+      }
     }
   }
 
