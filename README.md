@@ -1,6 +1,6 @@
 # 柳比歇夫时间账本 / Liubishev Time Ledger
 
-> 手动补录优先的 Obsidian 时间记录插件。  
+> 手动补录优先的时间记录插件。  
 > A manual-first time logging plugin inspired by the Liubishev method.
 > 
 ---
