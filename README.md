@@ -1,7 +1,7 @@
 # 柳比歇夫时间账本 / Liubishev Time Ledger
 
 > 手动补录优先的时间记录插件。  
-> A manual-first time logging plugin inspired by the Liubishev method.
+> Manual-first time logging, stats, Markdown export, and AI review with the Liubishev method.
 > 
 ---
 
