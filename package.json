@@ -1,0 +1,22 @@
+{
+  "name": "obsidian-liubishev-time-ledger",
+  "version": "0.1.0",
+  "description": "柳比歇夫时间账本 Obsidian 插件",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node esbuild.config.mjs",
+    "build": "tsc --noEmit --skipLibCheck && node esbuild.config.mjs production",
+    "test": "tsc -p tsconfig.json --outDir .test-build --module NodeNext --target ES2020 --moduleResolution NodeNext --skipLibCheck && node --test .test-build/tests/time.test.js .test-build/tests/stats.test.js .test-build/tests/daily-note.test.js .test-build/tests/category-suggest.test.js .test-build/tests/ai-category.test.js .test-build/tests/i18n.test.js"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^16.11.6",
+    "esbuild": "0.25.5",
+    "tslib": "2.4.0",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "obsidian": "latest"
+  }
+}
