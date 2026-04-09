@@ -1,10 +1,8 @@
 # 柳比歇夫时间账本 / Liubishev Time Ledger
 
 > 手动补录优先的 Obsidian 时间记录插件。  
-> A manual-first time logging plugin for Obsidian inspired by the Liubishev method.
-
-`Liubishev Time Ledger` 面向这样一类场景：你不想全程开计时器，但希望在一天结束后，快速把时间花销按**开始时间 + 结束时间**补录回来，并立刻看到时间轴、分类占比、Markdown 报告，以及 AI 辅助复盘。
-
+> A manual-first time logging plugin inspired by the Liubishev method.
+> 
 ---
 
 ## 为什么做这个插件
@@ -13,7 +11,7 @@
 
 - 先专注做事，之后再回顾补录
 - 用统一分类长期统计自己的时间结构
-- 把记录沉淀在 Obsidian 里，和 Daily Note、项目笔记联动
+- 和 Daily Note、项目笔记联动
 - 需要能导出 Markdown，方便写周报、月复盘和 AI 分析
 
 这个插件的设计重点不是“跑表”，而是：
@@ -100,9 +98,9 @@
 
 ## 安装
 
-### 方式一：Obsidian 社区插件市场
+### 方式一：社区插件市场
 
-当插件通过 Obsidian 社区插件审核后，可直接在：
+直接在：
 
 `Settings → Community plugins`
 
@@ -114,32 +112,11 @@
 
 将以下文件放入你的 Vault：
 
-```text
-<Vault>/.obsidian/plugins/liubishev-time-ledger/
-```
-
 需要至少包含：
 
 - `manifest.json`
 - `main.js`
 - `styles.css`
-
-然后在 Obsidian 中启用第三方插件即可。
-
-### 方式三：开发模式安装
-
-```bash
-npm install
-npm run dev
-```
-
-把当前项目目录放到：
-
-```text
-<Vault>/.obsidian/plugins/liubishev-time-ledger/
-```
-
-然后重载 Obsidian。
 
 ---
 
@@ -272,15 +249,6 @@ npm run dev
 
 ---
 
-## 适合的人群
-
-- 想实践柳比歇夫计时法的人
-- 不想一直挂着计时器、但愿意事后补录的人
-- 想把时间数据沉淀进 Obsidian 的人
-- 想把时间记录导出成 Markdown，再做周报 / 复盘 / AI 分析的人
-
----
-
 ## 开发
 
 安装依赖：
@@ -320,24 +288,6 @@ manifest.json  Obsidian 插件清单
 styles.css     插件样式
 versions.json  Obsidian 兼容版本映射
 ```
-
----
-
-## 发布到 Obsidian 社区插件市场
-
-按 Obsidian 官方流程，社区插件发布通常需要：
-
-1. GitHub 仓库
-2. 可公开访问的源码
-3. GitHub Release
-4. Release 附件中包含：
-   - `manifest.json`
-   - `main.js`
-   - `styles.css`
-5. 向 `obsidianmd/obsidian-releases` 提交插件收录 PR
-6. 等待官方审核
-
-也就是说，真正“上架”不是本地一次命令直接完成，而是一个**仓库发布 + 官方审核**流程。
 
 ---
 
