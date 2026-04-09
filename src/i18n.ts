@@ -325,7 +325,7 @@ const translations: Record<Locale, TranslationMap> = {
 
     "error.operationFailed": "Operation failed",
     "error.enableAiCategoryReviewFirst": "Enable AI category review in settings first.",
-    "error.enableAiFirst": "Enable AI and fill in Base URL, API Key, and Model in settings first.",
+    "error.enableAiFirst": "Enable AI and fill in Base URL, API key, and model in settings first.",
     "error.cannotFindEntryToEdit": "Could not find the entry to edit.",
     "error.cannotFindEntryToDuplicate": "Could not find the entry to duplicate.",
     "error.dateRequired": "Date is required.",
@@ -463,7 +463,7 @@ const translations: Record<Locale, TranslationMap> = {
     "settings.ai.enable": "Enable AI",
     "settings.ai.baseUrlDescription": "Supports OpenAI-compatible endpoints; /v1 and /chat/completions both work",
     "settings.ai.availableModels": "Available models",
-    "settings.ai.availableModelsIdle": "Fill in Base URL and API Key to load models automatically.",
+    "settings.ai.availableModelsIdle": "Fill in Base URL and API key to load models automatically.",
     "settings.ai.availableModelsLoading": "Loading model list...",
     "settings.ai.availableModelsReady": "{{count}} models found. You can pick one or keep typing manually.",
     "settings.ai.availableModelsEmpty": "The endpoint returned no models. You can still type a model manually.",
@@ -474,8 +474,8 @@ const translations: Record<Locale, TranslationMap> = {
 
     "command.openQuickEntry": "Add time entry",
     "command.continueFromLastEntry": "Continue from the previous entry",
-    "command.openTodayView": "Open the Today panel",
-    "command.openStatsView": "Open the Stats view",
+    "command.openTodayView": "Open the today panel",
+    "command.openStatsView": "Open the stats view",
     "command.exportTodaySummary": "Export today's Markdown summary",
     "command.exportWeekSummary": "Export this week's Markdown summary",
     "command.exportMonthSummary": "Export this month's Markdown summary",

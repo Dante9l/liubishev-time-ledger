@@ -1,6 +1,13 @@
 import { createTranslator, Locale } from "./i18n.js";
 import { CategorySuggestion } from "./types.js";
 
+type ParsedCategorySuggestion = Partial<{
+  categoryId: string;
+  tags: string[];
+  reason: string;
+  confidence: "high" | "medium" | "low";
+}>;
+
 export function parseCategorySuggestionResponse(
   text: string,
   validCategoryIds: string[],
@@ -8,12 +15,7 @@ export function parseCategorySuggestionResponse(
 ): CategorySuggestion {
   const t = createTranslator(locale);
   const raw = extractJSONObject(text, locale);
-  const parsed = JSON.parse(raw) as Partial<{
-    categoryId: string;
-    tags: string[];
-    reason: string;
-    confidence: "high" | "medium" | "low";
-  }>;
+  const parsed: ParsedCategorySuggestion = JSON.parse(raw);
   const categoryId = String(parsed.categoryId ?? "");
   if (!validCategoryIds.includes(categoryId)) {
     throw new Error(t("aiCategory.error.invalidCategory"));

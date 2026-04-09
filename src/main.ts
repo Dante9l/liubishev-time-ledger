@@ -292,7 +292,7 @@ export default class LiubishevTimeLedgerPlugin extends Plugin {
     }
 
     await leaf.setViewState({ type: TODAY_VIEW_TYPE, active: true });
-    this.app.workspace.revealLeaf(leaf);
+    await this.app.workspace.revealLeaf(leaf);
   }
 
   async activateStatsView(): Promise<void> {
@@ -307,7 +307,7 @@ export default class LiubishevTimeLedgerPlugin extends Plugin {
     if (!reused) {
       await leaf.setViewState({ type: STATS_VIEW_TYPE, active: true });
     }
-    this.app.workspace.revealLeaf(leaf);
+    await this.app.workspace.revealLeaf(leaf);
   }
 
   async exportPeriod(period: StatsPeriod, kind: "summary" | "raw"): Promise<string> {

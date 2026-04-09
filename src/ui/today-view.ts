@@ -7,9 +7,10 @@ import { TODAY_VIEW_TYPE } from "../view-types.js";
 
 const HOUR_ROW_HEIGHT = 56;
 const MIN_ENTRY_BLOCK_HEIGHT = 24;
+type TimedEntry = TimeEntry & { startTime: string; endTime: string };
 
 interface TimelineEntryLayout {
-  entry: TimeEntry;
+  entry: TimedEntry;
   category?: Category;
   startMinutes: number;
   endMinutes: number;
@@ -179,7 +180,7 @@ export class TodayView extends ItemView {
 
   private renderTimelineSection(
     gaps: GapSegment[],
-    entries: TimeEntry[],
+    entries: TimedEntry[],
     categoryMap: Map<string, Category>,
   ): void {
     const t = this.plugin.t.bind(this.plugin);
@@ -346,20 +347,20 @@ export class TodayView extends ItemView {
   }
 }
 
-function hasTimedRange(entry: TimeEntry): entry is TimeEntry & { startTime: string; endTime: string } {
+function hasTimedRange(entry: TimeEntry): entry is TimedEntry {
   return Boolean(entry.startTime && entry.endTime);
 }
 
-function getTimedEntries(entries: TimeEntry[]): TimeEntry[] {
+function getTimedEntries(entries: TimeEntry[]): TimedEntry[] {
   return entries
-    .filter((entry) => hasTimedRange(entry))
-    .sort((left, right) => minutesFromTimeKey(left.startTime!) - minutesFromTimeKey(right.startTime!));
+    .filter(hasTimedRange)
+    .sort((left, right) => minutesFromTimeKey(left.startTime) - minutesFromTimeKey(right.startTime));
 }
 
-function buildTimelineModel(entries: TimeEntry[], categoryMap: Map<string, Category>): TimelineModel {
+function buildTimelineModel(entries: TimedEntry[], categoryMap: Map<string, Category>): TimelineModel {
   const normalized = entries.map((entry) => {
-    const startMinutes = minutesFromTimeKey(entry.startTime!);
-    const rawEndMinutes = minutesFromTimeKey(entry.endTime!);
+    const startMinutes = minutesFromTimeKey(entry.startTime);
+    const rawEndMinutes = minutesFromTimeKey(entry.endTime);
     const endMinutes = rawEndMinutes > startMinutes ? rawEndMinutes : rawEndMinutes + 24 * 60;
     return {
       entry,
@@ -403,13 +404,13 @@ function buildTimelineModel(entries: TimeEntry[], categoryMap: Map<string, Categ
 
 function assignTimelineColumns(
   entries: Array<{
-    entry: TimeEntry;
+    entry: TimedEntry;
     category?: Category;
     startMinutes: number;
     endMinutes: number;
   }>,
 ): Array<{
-  entry: TimeEntry;
+  entry: TimedEntry;
   category?: Category;
   startMinutes: number;
   endMinutes: number;
@@ -417,7 +418,7 @@ function assignTimelineColumns(
   columns: number;
 }> {
   const result: Array<{
-    entry: TimeEntry;
+    entry: TimedEntry;
     category?: Category;
     startMinutes: number;
     endMinutes: number;

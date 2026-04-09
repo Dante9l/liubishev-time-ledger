@@ -2,6 +2,8 @@ import { createTranslator, Locale } from "./i18n.js";
 import { formatDuration, minutesFromTimeKey, parseDateKey, shiftDateKey } from "./time.js";
 import { Category, CategorySummary, GapSegment, PeriodSummary, StatsPeriod, TagSummary, TimeEntry } from "./types.js";
 
+type TimedEntry = TimeEntry & { startTime: string; endTime: string };
+
 export function getPeriodBounds(period: StatsPeriod, referenceDate: string): { startDate: string; endDate: string } {
   if (period === "day") {
     return { startDate: referenceDate, endDate: referenceDate };
@@ -107,8 +109,8 @@ function summarizeTags(entries: TimeEntry[]): TagSummary[] {
 
 function findDailyGaps(entries: TimeEntry[]): GapSegment[] {
   const timedEntries = entries
-    .filter((entry) => entry.startTime && entry.endTime)
-    .sort((left, right) => minutesFromTimeKey(left.startTime!) - minutesFromTimeKey(right.startTime!));
+    .filter(hasTimedRange)
+    .sort((left, right) => minutesFromTimeKey(left.startTime) - minutesFromTimeKey(right.startTime));
 
   const gaps: GapSegment[] = [];
   for (let index = 1; index < timedEntries.length; index += 1) {
@@ -130,6 +132,10 @@ function findDailyGaps(entries: TimeEntry[]): GapSegment[] {
   }
 
   return gaps;
+}
+
+function hasTimedRange(entry: TimeEntry): entry is TimedEntry {
+  return Boolean(entry.startTime && entry.endTime);
 }
 
 function buildPeriodLabel(period: StatsPeriod, startDate: string, endDate: string, locale: Locale): string {

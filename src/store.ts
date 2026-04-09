@@ -81,7 +81,7 @@ function mergeData(loaded: unknown, locale = getCurrentLocale()): TimeLedgerData
     return data;
   }
 
-  const candidate = loaded as Partial<TimeLedgerData>;
+  const candidate: Partial<TimeLedgerData> = loaded;
   const entries = Array.isArray(candidate.entries) ? candidate.entries : [];
   return {
     version: typeof candidate.version === "number" ? candidate.version : data.version,

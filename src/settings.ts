@@ -240,7 +240,7 @@ export class TimeLedgerSettingTab extends PluginSettingTab {
       }));
 
     new Setting(containerEl)
-      .setName("API Key")
+      .setName("API key")
       .addText((text) => {
         text.inputEl.type = "password";
         text.setValue(settings.ai.apiKey);

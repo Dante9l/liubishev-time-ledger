@@ -212,7 +212,7 @@ export class StatsView extends ItemView {
 
   private setPeriod(period: StatsPeriod): void {
     this.period = period;
-    void this.refresh();
+    this.refresh();
   }
 }
 
