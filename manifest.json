@@ -3,7 +3,7 @@
   "name": "柳比歇夫时间账本 / Liubishev Time Ledger",
   "version": "0.1.0",
   "minAppVersion": "0.15.0",
-  "description": "用柳比歇夫计时法在 Obsidian 中快速补录、统计并复盘每日时间花销。 / Quick manual time logging, statistics, and review in Obsidian with the Liubishev method.",
+  "description": "用柳比歇夫计时法快速补录、统计并复盘每日时间花销。 / Quick manual time logging, statistics, and review in Obsidian with the Liubishev method.",
   "author": "ASUS",
   "isDesktopOnly": false
 }
