@@ -3,7 +3,7 @@
   "name": "Liubishev Time Ledger",
   "version": "0.1.0",
   "minAppVersion": "0.15.0",
-  "description": "Quick manual time logging, statistics, and review in Obsidian with the Liubishev method.",
+  "description": "Manual-first time logging, stats, Markdown export, and AI review with the Liubishev method.",
   "author": "dante9l",
   "isDesktopOnly": false
 }
